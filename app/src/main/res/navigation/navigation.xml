@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/recipesFragment">
+    <fragment
+        android:id="@+id/recipesFragment"
+        android:name="com.jfalstaff.tasteit.RecipesFragment"
+        android:label="Recipes" />
+    <fragment
+        android:id="@+id/favouriteFragment"
+        android:name="com.jfalstaff.tasteit.FavouriteFragment"
+        android:label="Favourite" />
+    <fragment
+        android:id="@+id/foodJokeFragment"
+        android:name="com.jfalstaff.tasteit.FoodJokeFragment"
+        android:label="Food Joke" />
+</navigation>

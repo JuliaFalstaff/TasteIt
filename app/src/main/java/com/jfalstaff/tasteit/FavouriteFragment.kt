@@ -1,4 +1,6 @@
 package com.jfalstaff.tasteit
 
-class FavouriteFragment {
+import androidx.fragment.app.Fragment
+
+class FavouriteFragment : Fragment() {
 }

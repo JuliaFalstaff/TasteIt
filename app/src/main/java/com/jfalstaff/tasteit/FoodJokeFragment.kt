@@ -1,4 +1,6 @@
 package com.jfalstaff.tasteit
 
-class FoodJokeFragment {
+import androidx.fragment.app.Fragment
+
+class FoodJokeFragment: Fragment(){
 }
