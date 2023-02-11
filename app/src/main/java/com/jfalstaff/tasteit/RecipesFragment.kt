@@ -21,6 +21,19 @@ class RecipesFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        startShimmerEffect()
+    }
+
+    private fun startShimmerEffect() {
+        binding.shimmerPlaceholderLayout.shimmerFrameLayout.startShimmer()
+    }
+
+    private fun stopShimmerEffect() {
+        binding.shimmerPlaceholderLayout.shimmerFrameLayout.stopShimmer()
+    }
+
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
