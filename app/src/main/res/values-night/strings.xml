@@ -3,4 +3,5 @@
     <string name="joke">Joke</string>
     <string name="favourite">Favourite</string>
     <string name="recipes">Recipes</string>
+    <string name="no_internet_connection">No Internet connection</string>
 </resources>
