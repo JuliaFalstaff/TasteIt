@@ -1,15 +1,15 @@
-package com.jfalstaff.tasteit
+package com.jfalstaff.tasteit.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.jfalstaff.tasteit.databinding.FragmentFoodJokeBinding
+import com.jfalstaff.tasteit.databinding.FragmentFavouriteBinding
 
-class FoodJokeFragment : Fragment() {
+class FavouriteFragment : Fragment() {
 
-    private var _binding: FragmentFoodJokeBinding? = null
+    private var _binding: FragmentFavouriteBinding? = null
     val binding get() = _binding ?: throw Exception("FragmentRecipesBinding is null")
 
     override fun onCreateView(
@@ -17,7 +17,7 @@ class FoodJokeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFoodJokeBinding.inflate(inflater, container, false)
+        _binding = FragmentFavouriteBinding.inflate(inflater, container, false)
         return binding.root
     }
 

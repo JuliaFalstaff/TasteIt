@@ -1,4 +1,4 @@
-package com.jfalstaff.tasteit
+package com.jfalstaff.tasteit.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
