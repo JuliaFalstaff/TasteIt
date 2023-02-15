@@ -1,4 +1,4 @@
-package com.jfalstaff.tasteit.data.remote.dto
+package com.jfalstaff.tasteit.data.dto
 
 
 import com.google.gson.annotations.SerializedName
