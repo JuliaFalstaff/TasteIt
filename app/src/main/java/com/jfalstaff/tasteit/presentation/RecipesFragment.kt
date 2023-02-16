@@ -11,6 +11,7 @@ import com.jfalstaff.tasteit.BuildConfig
 import com.jfalstaff.tasteit.databinding.FragmentRecipesBinding
 import com.jfalstaff.tasteit.domain.NetworkResult
 import com.jfalstaff.tasteit.presentation.adapters.RecipesAdapter
+import com.jfalstaff.tasteit.presentation.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,7 +38,7 @@ class RecipesFragment : Fragment() {
 
     private fun setUpRV() {
         binding.recipesRecyclerView.adapter = adapter
-        viewModel.getRecipes(applyQueries())
+        viewModel.getRecipes()
         viewModel.recipes.observe(viewLifecycleOwner) { response ->
             when(response) {
                 is NetworkResult.Success -> {
@@ -55,17 +56,6 @@ class RecipesFragment : Fragment() {
                 }
             }
         }
-    }
-
-    private fun applyQueries() : HashMap<String, String> {
-        val queries: HashMap<String, String> = HashMap()
-        queries["number"] = "50"
-        queries["apiKey"] = BuildConfig.API_KEY
-        queries["type"] = "snack"
-        queries["diet"] = "vegan"
-        queries["addRecipeInformation"] = "true"
-        queries["fillIngredients"] = "true"
-        return queries
     }
 
     private fun startShimmerEffect() {
