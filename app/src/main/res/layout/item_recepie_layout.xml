@@ -121,7 +121,7 @@
                 android:layout_marginStart="24dp"
                 app:layout_constraintStart_toEndOf="@+id/timeTextView"
                 app:layout_constraintTop_toBottomOf="@+id/veganImageView"
-                tools:text="100" />
+                android:text="@string/vegan" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

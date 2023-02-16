@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.bumptech.glide.Glide
 import com.jfalstaff.tasteit.R
 import com.jfalstaff.tasteit.databinding.ItemRecepieLayoutBinding
@@ -40,16 +41,20 @@ class RecipesAdapter : RecyclerView.Adapter<RecipesAdapter.RecipesViewHolder>() 
             descriptionTextView.text = result.summary
             likeTextView.text = result.aggregateLikes.toString()
             timeTextView.text = result.readyInMinutes.toString()
-            Glide.with(itemView).load(result.image).into(recipeImageView)
+            recipeImageView.load(result.image) {
+                crossfade(600)
+            }
+//            Glide.with(itemView).load(result.image).into(recipeImageView)
             if (result.vegan) {
                 veganTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.green))
-                veganImageView.setBackgroundColor(
+                veganImageView.setColorFilter(
                     ContextCompat.getColor(
                         itemView.context,
                         R.color.green
                     )
                 )
             }
+
         }
 
         companion object {
