@@ -1,7 +1,7 @@
 package com.jfalstaff.tasteit.data.remote
 
 import android.util.Log
-import com.jfalstaff.tasteit.data.dto.FoodRecipeDto
+import com.jfalstaff.tasteit.data.remote.dto.FoodRecipeDto
 import javax.inject.Inject
 
 class RemoteDataSource @Inject constructor(private val apiService: ApiService) {

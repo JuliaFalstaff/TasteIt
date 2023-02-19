@@ -1,6 +1,6 @@
 package com.jfalstaff.tasteit.data.remote
 
-import com.jfalstaff.tasteit.data.dto.FoodRecipeDto
+import com.jfalstaff.tasteit.data.remote.dto.FoodRecipeDto
 import com.jfalstaff.tasteit.domain.entities.FoodRecipe
 import retrofit2.Response
 import retrofit2.http.GET
