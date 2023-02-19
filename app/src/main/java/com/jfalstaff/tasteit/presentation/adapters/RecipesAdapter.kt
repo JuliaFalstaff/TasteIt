@@ -43,6 +43,7 @@ class RecipesAdapter : RecyclerView.Adapter<RecipesAdapter.RecipesViewHolder>() 
             timeTextView.text = result.readyInMinutes.toString()
             recipeImageView.load(result.image) {
                 crossfade(600)
+                error(R.drawable.ic_error_placeholder)
             }
 //            Glide.with(itemView).load(result.image).into(recipeImageView)
             if (result.vegan) {
