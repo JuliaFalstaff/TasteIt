@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.jfalstaff.tasteit.databinding.FragmentRecipesBinding
 import com.jfalstaff.tasteit.domain.NetworkResult
 import com.jfalstaff.tasteit.presentation.adapters.RecipesAdapter
+import com.jfalstaff.tasteit.presentation.util.hasInternetConnection
 import com.jfalstaff.tasteit.presentation.util.observeOnce
 import com.jfalstaff.tasteit.presentation.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,14 +40,18 @@ class RecipesFragment : Fragment() {
     }
 
     private fun readDataBase() {
-        Log.d("VVV", "Database data")
-        viewModel.readRecipes.observeOnce(viewLifecycleOwner) { database ->
-            if (database.isNotEmpty()) {
-                adapter.setData(database.first())
-                stopShimmerEffect()
-            } else {
-                requestApiData()
+        if (hasInternetConnection(requireActivity())) {
+            viewModel.readRecipesFromDB.observeOnce(viewLifecycleOwner) { db ->
+                if (db.isNotEmpty()) {
+                    Log.d("VVV", "DB data")
+                    adapter.setData(db.first())
+                    stopShimmerEffect()
+                } else {
+                    requestApiData()
+                }
             }
+        } else {
+            loadCacheData()
         }
     }
 
@@ -55,8 +60,14 @@ class RecipesFragment : Fragment() {
     }
 
     private fun loadCacheData() {
-        viewModel.readRecipes.observe(viewLifecycleOwner) {
-            adapter.setData(it.first())
+        stopShimmerEffect()
+        viewModel.readRecipesFromDB.observe(viewLifecycleOwner) { db ->
+            if (db.isNotEmpty()) {
+                adapter.setData(db.first())
+            } else {
+                binding.errorImageView.visibility = View.VISIBLE
+                binding.errorTextView.visibility = View.VISIBLE
+            }
         }
     }
 
@@ -70,9 +81,13 @@ class RecipesFragment : Fragment() {
                     response.data?.let { recipe ->
                         adapter.setData(recipe)
                     }
+                    binding.errorImageView.visibility = View.INVISIBLE
+                    binding.errorTextView.visibility = View.INVISIBLE
                 }
                 is NetworkResult.Loading -> {
                     startShimmerEffect()
+                    binding.errorImageView.visibility = View.INVISIBLE
+                    binding.errorTextView.visibility = View.INVISIBLE
                 }
                 is NetworkResult.Error -> {
                     stopShimmerEffect()
@@ -82,6 +97,9 @@ class RecipesFragment : Fragment() {
                         response.message.toString(),
                         Toast.LENGTH_SHORT
                     ).show()
+                    binding.errorImageView.visibility = View.VISIBLE
+                    binding.errorTextView.visibility = View.VISIBLE
+                    binding.errorTextView.text = response.message.toString()
                 }
             }
         }

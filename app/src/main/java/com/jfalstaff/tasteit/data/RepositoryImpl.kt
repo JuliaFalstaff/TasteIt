@@ -4,18 +4,19 @@ import com.jfalstaff.tasteit.data.local.LocalDataSource
 import com.jfalstaff.tasteit.data.mapper.Mapper
 import com.jfalstaff.tasteit.data.remote.RemoteDataSource
 import com.jfalstaff.tasteit.domain.IRepository
+import com.jfalstaff.tasteit.domain.NetworkResult
 import com.jfalstaff.tasteit.domain.entities.FoodRecipe
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(
-    private val remoteDataSource: RemoteDataSource?,
+    private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val mapper: Mapper
 ) : IRepository {
     override suspend fun getRecipes(queries: Map<String, String>): FoodRecipe {
-        return mapper.mapFoodRecipeDtoToEntity(remoteDataSource?.getRecipes(queries))
+        return mapper.mapFoodRecipeDtoToEntity(remoteDataSource?.getRecipes(queries)?.body())
     }
 
     override fun readDatabase(): Flow<List<FoodRecipe>> {
@@ -26,5 +27,27 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun insertRecipes(recipes: FoodRecipe) {
         localDataSource.insertRecipes(mapper.mapFoodRecipeDtoToDbModel(recipes))
+    }
+
+    override suspend fun getRecipesResult(queries: Map<String, String>): NetworkResult<FoodRecipe> {
+       val response = remoteDataSource?.getRecipes(queries)
+        when {
+            response?.message().toString().contains("timeout") -> {
+                return NetworkResult.Error("Timeout")
+            }
+            response?.code() == 402 -> {
+                return NetworkResult.Error("API Key Limited.")
+            }
+            response?.body()?.results.isNullOrEmpty() -> {
+                return NetworkResult.Error("Recipes not found.")
+            }
+            response?.isSuccessful -> {
+                val foodRecipes = mapper.mapFoodRecipeDtoToEntity(response.body())
+                return NetworkResult.Success(foodRecipes)
+            }
+            else -> {
+                return NetworkResult.Error(response?.message())
+            }
+        }
     }
 }

@@ -14,14 +14,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val useCase: GetRecipesUseCase,
+    private val remoteUseCase: GetRecipesUseCase,
     private val localUseCase: GetLocalRecipesUseCase,
     private val insertRecipeUseCase: InsertRecipeUseCase
 ) : ViewModel() {
 
     private var _recipes: MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
     val recipes: LiveData<NetworkResult<FoodRecipe>> = _recipes
-    val readRecipes: LiveData<List<FoodRecipe>> = localUseCase().asLiveData()
+    val readRecipesFromDB: LiveData<List<FoodRecipe>> = localUseCase().asLiveData()
 
     private fun insertRecipes(recipe: FoodRecipe) {
         viewModelScope.launch {
@@ -29,14 +29,15 @@ class MainViewModel @Inject constructor(
         }
     }
 
+
     private fun applyQueries(queries: Map<String, String>) {
         _recipes.value = NetworkResult.Loading()
         viewModelScope.launch {
             try {
-                val response = useCase.invoke(queries)
-                _recipes.value = NetworkResult.Success(response)
+                val response = remoteUseCase.invoke(queries)
+                _recipes.value = NetworkResult.Success(response.data ?: FoodRecipe(emptyList()))
                 val foodRecipe = _recipes.value?.data
-                foodRecipe?. let { insertRecipes(it) }
+                foodRecipe?.let { insertRecipes(it) }
             } catch (e: Exception) {
                 _recipes.value = NetworkResult.Error(e.message.toString())
             }
@@ -53,4 +54,5 @@ class MainViewModel @Inject constructor(
         queries[API_FILL_INGREDIENTS] = "true"
         applyQueries(queries)
     }
+
 }
