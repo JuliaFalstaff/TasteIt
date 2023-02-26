@@ -1,10 +1,9 @@
 package com.jfalstaff.tasteit.di
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import com.jfalstaff.tasteit.data.Constants.Companion.DB_NAME
-import com.jfalstaff.tasteit.data.local.RecipesDataBase
+import com.jfalstaff.tasteit.data.local.database.RecipesDataBase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

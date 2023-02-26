@@ -1,4 +1,4 @@
-package com.jfalstaff.tasteit.data.local
+package com.jfalstaff.tasteit.data.local.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

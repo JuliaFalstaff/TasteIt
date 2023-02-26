@@ -46,10 +46,10 @@ class MainViewModel @Inject constructor(
 
     fun getRecipes() {
         val queries: HashMap<String, String> = HashMap()
-        queries[API_NUMBER] = "50"
+        queries[API_NUMBER] = DEFAULT_RECIPES_NUMBER
         queries[API_KEY] = BuildConfig.API_KEY
-        queries[API_TYPE] = "snack"
-        queries[API_DIET] = "vegan"
+        queries[API_TYPE] = DEFAULT_MEAL_TYPE
+        queries[API_DIET] = DEFAULT_DIET_TYPE
         queries[API_ADD_RECIPE_INFO] = "true"
         queries[API_FILL_INGREDIENTS] = "true"
         applyQueries(queries)

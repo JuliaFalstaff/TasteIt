@@ -3,7 +3,7 @@ package com.jfalstaff.tasteit.data.local.model
 
 import androidx.room.ColumnInfo
 import androidx.room.TypeConverters
-import com.jfalstaff.tasteit.data.local.IngredientsTypeConverter
+import com.jfalstaff.tasteit.data.local.database.IngredientsTypeConverter
 
 data class ResultDbModel(
     @ColumnInfo(name = "aggregateLikes")
