@@ -6,14 +6,14 @@
     app:startDestination="@id/recipesFragment">
     <fragment
         android:id="@+id/recipesFragment"
-        android:name="com.jfalstaff.tasteit.presentation.RecipesFragment"
+        android:name="com.jfalstaff.tasteit.presentation.fragments.RecipesFragment"
         android:label="Recipes" />
     <fragment
         android:id="@+id/favouriteFragment"
-        android:name="com.jfalstaff.tasteit.presentation.FavouriteFragment"
+        android:name="com.jfalstaff.tasteit.presentation.fragments.FavouriteFragment"
         android:label="Favourite" />
     <fragment
         android:id="@+id/foodJokeFragment"
-        android:name="com.jfalstaff.tasteit.presentation.FoodJokeFragment"
+        android:name="com.jfalstaff.tasteit.presentation.fragments.FoodJokeFragment"
         android:label="Food Joke" />
 </navigation>
