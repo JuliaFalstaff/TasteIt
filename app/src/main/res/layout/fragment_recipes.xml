@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
-    <include android:id="@+id/shimmerPlaceholderLayout"
-        layout="@layout/shimmer_rv_layout"/>
+    <include
+        android:id="@+id/shimmerPlaceholderLayout"
+        layout="@layout/shimmer_rv_layout" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipesRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/margin_8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_recepie_layout"/>
+        tools:listitem="@layout/item_recepie_layout" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/recipesFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="24dp"
+        android:layout_margin="@dimen/margin_24dp"
         android:src="@drawable/ic_restaurant"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,8 +33,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/errorImageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/margin_100dp"
+        android:layout_height="@dimen/margin_100dp"
         android:alpha="0.3"
         android:src="@drawable/ic_sad"
         android:visibility="invisible"
@@ -47,7 +48,7 @@
         android:id="@+id/errorTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/margin_8dp"
         android:alpha="0.5"
         android:text="@string/no_internet_connection"
         android:textSize="18sp"
@@ -56,6 +57,4 @@
         app:layout_constraintEnd_toEndOf="@+id/errorImageView"
         app:layout_constraintStart_toStartOf="@+id/errorImageView"
         app:layout_constraintTop_toBottomOf="@id/errorImageView" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

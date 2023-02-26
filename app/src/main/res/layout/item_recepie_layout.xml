@@ -10,7 +10,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="@dimen/corner_radius_10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +24,7 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/recipeImageView"
-                android:layout_width="200dp"
+                android:layout_width="@dimen/image_width_200dp"
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -36,12 +36,12 @@
                 android:id="@+id/titleTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
+                android:layout_margin="@dimen/margin_12dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/courgette"
                 android:maxLines="2"
                 android:textColor="@color/darker"
-                android:textSize="20sp"
+                android:textSize="@dimen/textsize_20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/recipeImageView"
@@ -52,7 +52,7 @@
                 android:id="@+id/descriptionTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/margin_12dp"
                 android:ellipsize="end"
                 android:maxLines="3"
                 android:textColor="@color/darkGray"
@@ -65,14 +65,14 @@
                 android:id="@+id/heartImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="36dp"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:layout_marginBottom="@dimen/margin_36dp"
                 android:src="@drawable/ic_like"
-                app:tint="@color/red"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/likeTextView"
                 app:layout_constraintStart_toStartOf="@+id/likeTextView"
-                app:layout_constraintTop_toBottomOf="@+id/descriptionTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/descriptionTextView"
+                app:tint="@color/red" />
 
             <TextView
                 android:id="@+id/likeTextView"
@@ -87,12 +87,12 @@
                 android:id="@+id/timeImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:tint="@color/yellow"
                 app:layout_constraintBottom_toBottomOf="@+id/heartImageView"
                 app:layout_constraintEnd_toEndOf="@+id/timeTextView"
                 app:layout_constraintStart_toStartOf="@+id/timeTextView"
                 app:layout_constraintTop_toTopOf="@+id/heartImageView"
-                app:srcCompat="@drawable/ic_clock" />
+                app:srcCompat="@drawable/ic_clock"
+                app:tint="@color/yellow" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/veganImageView"
@@ -108,7 +108,7 @@
                 android:id="@+id/timeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="@dimen/margin_24dp"
                 android:textColor="@color/yellow"
                 app:layout_constraintStart_toEndOf="@+id/likeTextView"
                 app:layout_constraintTop_toBottomOf="@+id/timeImageView"
@@ -118,10 +118,10 @@
                 android:id="@+id/veganTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="@dimen/margin_24dp"
+                android:text="@string/vegan"
                 app:layout_constraintStart_toEndOf="@+id/timeTextView"
-                app:layout_constraintTop_toBottomOf="@+id/veganImageView"
-                android:text="@string/vegan" />
+                app:layout_constraintTop_toBottomOf="@+id/veganImageView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

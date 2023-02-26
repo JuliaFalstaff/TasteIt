@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_12dp">12dp</dimen>
+    <dimen name="margin_24dp">24dp</dimen>
+    <dimen name="textsize_18sp">18sp</dimen>
+    <dimen name="margin_36dp">36dp</dimen>
+    <dimen name="corner_radius_10dp">10dp</dimen>
+    <dimen name="image_width_200dp">200dp</dimen>
+    <dimen name="textsize_20sp">20sp</dimen>
+    <dimen name="shimmer_height_50dp">50dp</dimen>
+    <dimen name="shimmer_height_65dp">65dp</dimen>
+    <dimen name="margin_4dp">4dp</dimen>
+    <dimen name="margin_8dp">8dp</dimen>
+    <dimen name="margin_100dp">100dp</dimen>
+</resources>
