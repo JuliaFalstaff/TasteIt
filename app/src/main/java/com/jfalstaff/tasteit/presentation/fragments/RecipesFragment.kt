@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.jfalstaff.tasteit.R
 import com.jfalstaff.tasteit.databinding.FragmentRecipesBinding
 import com.jfalstaff.tasteit.domain.NetworkResult
 import com.jfalstaff.tasteit.presentation.adapters.RecipesAdapter
@@ -37,6 +39,13 @@ class RecipesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpRV()
         readDataBase()
+        setFabClickListener()
+    }
+
+    private fun setFabClickListener() {
+        binding.recipesFab.setOnClickListener {
+            findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
+        }
     }
 
     private fun readDataBase() {

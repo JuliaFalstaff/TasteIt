@@ -22,4 +22,5 @@
     <color name="checkedChipBackgroundColor">#206200EA</color>
     <color name="chipBackgroundColor">@color/lightGray</color>
     <color name="chipTextColor">@color/darkGray</color>
+    <color name="checkedChipTextColor">@color/purple_500</color>
 </resources>

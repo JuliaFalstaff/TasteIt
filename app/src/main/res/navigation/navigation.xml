@@ -7,7 +7,11 @@
     <fragment
         android:id="@+id/recipesFragment"
         android:name="com.jfalstaff.tasteit.presentation.fragments.RecipesFragment"
-        android:label="Recipes" />
+        android:label="Recipes" >
+        <action
+            android:id="@+id/action_recipesFragment_to_recipesBottomSheet"
+            app:destination="@id/recipesBottomSheet" />
+    </fragment>
     <fragment
         android:id="@+id/favouriteFragment"
         android:name="com.jfalstaff.tasteit.presentation.fragments.FavouriteFragment"
@@ -16,4 +20,12 @@
         android:id="@+id/foodJokeFragment"
         android:name="com.jfalstaff.tasteit.presentation.fragments.FoodJokeFragment"
         android:label="Food Joke" />
+    <dialog
+        android:id="@+id/recipesBottomSheet"
+        android:name="com.jfalstaff.tasteit.presentation.fragments.RecipesBottomSheet"
+        android:label="RecipesBottomSheet" >
+        <action
+            android:id="@+id/action_recipesBottomSheet_to_recipesFragment"
+            app:destination="@id/recipesFragment" />
+    </dialog>
 </navigation>
