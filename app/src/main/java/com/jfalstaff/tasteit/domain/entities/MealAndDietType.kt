@@ -1,4 +1,4 @@
-package com.jfalstaff.tasteit.data.local.datastore
+package com.jfalstaff.tasteit.domain.entities
 
 data class MealAndDietType(
     val selectedMealType: String,

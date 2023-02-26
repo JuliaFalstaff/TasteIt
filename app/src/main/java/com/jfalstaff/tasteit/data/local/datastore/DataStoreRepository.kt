@@ -7,6 +7,8 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.jfalstaff.tasteit.data.Constants.Companion.PREFERENCES_NAME
+import com.jfalstaff.tasteit.domain.IDataStore
+import com.jfalstaff.tasteit.domain.entities.MealAndDietType
 import com.jfalstaff.tasteit.presentation.util.DEFAULT_DIET_TYPE
 import com.jfalstaff.tasteit.presentation.util.DEFAULT_MEAL_TYPE
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -17,12 +19,12 @@ import java.io.IOException
 import javax.inject.Inject
 
 
-class DataStoreRepository @Inject constructor(@ApplicationContext private val context: Context) {
+class DataStoreRepository @Inject constructor(@ApplicationContext private val context: Context) :
+    IDataStore {
 
-    //    private val dataStore: DataStore<Preferences> by preferencesDataStore(name = PREFERENCES_NAME)
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = PREFERENCES_NAME)
 
-    private suspend fun saveMealAndDietType(
+    override suspend fun saveMealAndDietType(
         mealType: String,
         mealTypeId: Int,
         dietType: String,
@@ -36,7 +38,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         }
     }
 
-    val readDataStore: Flow<MealAndDietType> = context.dataStore.data
+    override val readDataStore: Flow<MealAndDietType> = context.dataStore.data
         .catch { exception ->
             if (exception is IOException) {
                 emit(emptyPreferences())
