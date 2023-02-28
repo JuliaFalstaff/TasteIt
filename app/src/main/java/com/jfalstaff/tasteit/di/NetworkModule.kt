@@ -2,7 +2,9 @@ package com.jfalstaff.tasteit.di
 
 import com.jfalstaff.tasteit.data.Constants
 import com.jfalstaff.tasteit.data.RepositoryImpl
+import com.jfalstaff.tasteit.data.local.datastore.DataStoreRepository
 import com.jfalstaff.tasteit.data.remote.ApiService
+import com.jfalstaff.tasteit.domain.IDataStore
 import com.jfalstaff.tasteit.domain.IRepository
 import dagger.Binds
 import dagger.Module
@@ -22,6 +24,10 @@ interface NetworkModule {
     @Binds
     @Singleton
     fun bindRepository(impl: RepositoryImpl): IRepository
+
+    @Binds
+    @Singleton
+    fun bindDataStore(impl: DataStoreRepository): IDataStore
 
     companion object {
         @Provides

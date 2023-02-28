@@ -1,5 +1,6 @@
 package com.jfalstaff.tasteit.presentation.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.jfalstaff.tasteit.BuildConfig
 import com.jfalstaff.tasteit.domain.NetworkResult
@@ -28,7 +29,7 @@ class MainViewModel @Inject constructor(
     private var mealType = DEFAULT_MEAL_TYPE
     private var dietType = DEFAULT_DIET_TYPE
 
-    private fun saveDietAndMealType(
+    fun saveDietAndMealType(
         mealType: String,
         mealTypeId: Int,
         dietType: String,
@@ -55,6 +56,7 @@ class MainViewModel @Inject constructor(
                 foodRecipe?.let { insertRecipes(it) }
             } catch (e: Exception) {
                 _recipes.value = NetworkResult.Error(e.message.toString())
+                Log.d("VVV", e.stackTraceToString())
             }
         }
     }

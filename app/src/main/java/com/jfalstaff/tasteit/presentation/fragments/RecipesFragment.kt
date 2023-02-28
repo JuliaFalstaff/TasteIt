@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.jfalstaff.tasteit.R
 import com.jfalstaff.tasteit.databinding.FragmentRecipesBinding
 import com.jfalstaff.tasteit.domain.NetworkResult
@@ -25,6 +27,7 @@ class RecipesFragment : Fragment() {
     val binding get() = _binding ?: throw Exception("FragmentRecipesBinding is null")
     private val adapter: RecipesAdapter by lazy { RecipesAdapter() }
     private val viewModel by lazy { ViewModelProvider(this)[MainViewModel::class.java] }
+    val args by navArgs<RecipesFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,7 +54,7 @@ class RecipesFragment : Fragment() {
     private fun readDataBase() {
         if (hasInternetConnection(requireActivity())) {
             viewModel.readRecipesFromDB.observeOnce(viewLifecycleOwner) { db ->
-                if (db.isNotEmpty()) {
+                if (db.isNotEmpty() && !args.backFromBottomFragment) {
                     Log.d("VVV", "DB data")
                     adapter.setData(db.first())
                     stopShimmerEffect()

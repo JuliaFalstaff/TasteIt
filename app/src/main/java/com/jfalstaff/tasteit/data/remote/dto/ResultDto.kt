@@ -11,7 +11,7 @@ data class ResultDto(
     @SerializedName("dairyFree")
     val dairyFree: Boolean,
     @SerializedName("extendedIngredients")
-    val extendedIngredients: List<ExtendedIngredientDto>,
+    val extendedIngredients: List<ExtendedIngredientDto>? = null,
     @SerializedName("glutenFree")
     val glutenFree: Boolean,
     @SerializedName("id")

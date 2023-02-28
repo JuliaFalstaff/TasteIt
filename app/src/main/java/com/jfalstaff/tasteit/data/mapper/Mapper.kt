@@ -1,6 +1,5 @@
 package com.jfalstaff.tasteit.data.mapper
 
-import androidx.room.ColumnInfo
 import com.jfalstaff.tasteit.data.local.model.ExtendedIngredientDbModel
 import com.jfalstaff.tasteit.data.local.model.FoodRecipeDbModel
 import com.jfalstaff.tasteit.data.local.model.RecipesDbModel
@@ -41,12 +40,12 @@ class Mapper @Inject constructor() {
         )
     }
 
-    private fun mapExtendedIngredientsDtoToEntity(extendedIngredientDto: List<ExtendedIngredientDto>): List<ExtendedIngredient> {
-        return extendedIngredientDto.map {
+    private fun mapExtendedIngredientsDtoToEntity(extendedIngredientDto: List<ExtendedIngredientDto>?): List<ExtendedIngredient>? {
+        return extendedIngredientDto?.map {
             ExtendedIngredient(
                 amount = it.amount,
                 consistency = it.consistency,
-                image = it.image,
+                image = it.image ?: "",
                 name = it.name,
                 original = it.original,
                 unit = it.unit
@@ -54,8 +53,8 @@ class Mapper @Inject constructor() {
         }
     }
 
-    private fun mapExtendedIngredientsDbModelToEntity(extendedIngredientDb: List<ExtendedIngredientDbModel>): List<ExtendedIngredient> {
-        return extendedIngredientDb.map {
+    private fun mapExtendedIngredientsDbModelToEntity(extendedIngredientDb: List<ExtendedIngredientDbModel>?): List<ExtendedIngredient>? {
+        return extendedIngredientDb?.map {
             ExtendedIngredient(
                 amount = it.amount,
                 consistency = it.consistency,
@@ -94,8 +93,8 @@ class Mapper @Inject constructor() {
         }
     }
 
-    private fun mapIngrEntityToDbModel(ingredients: List<ExtendedIngredient>): List<ExtendedIngredientDbModel> {
-        return ingredients.map {
+    private fun mapIngrEntityToDbModel(ingredients: List<ExtendedIngredient>?): List<ExtendedIngredientDbModel>? {
+        return ingredients?.map {
             ExtendedIngredientDbModel(
                 amount = it.amount,
                 consistency = it.consistency,

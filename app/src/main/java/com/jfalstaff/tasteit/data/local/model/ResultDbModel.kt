@@ -14,7 +14,7 @@ data class ResultDbModel(
     val dairyFree: Boolean,
     @ColumnInfo(name = "extendedIngredients")
     @TypeConverters(IngredientsTypeConverter::class)
-    val extendedIngredients: List<ExtendedIngredientDbModel>,
+    val extendedIngredients: List<ExtendedIngredientDbModel>?,
     @ColumnInfo(name = "glutenFree")
     val glutenFree: Boolean,
     @ColumnInfo(name = "id")

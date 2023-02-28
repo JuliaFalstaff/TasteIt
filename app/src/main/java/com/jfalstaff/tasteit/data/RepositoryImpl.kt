@@ -1,5 +1,6 @@
 package com.jfalstaff.tasteit.data
 
+import android.util.Log
 import com.jfalstaff.tasteit.data.local.LocalDataSource
 import com.jfalstaff.tasteit.data.mapper.Mapper
 import com.jfalstaff.tasteit.data.remote.RemoteDataSource
@@ -46,7 +47,9 @@ class RepositoryImpl @Inject constructor(
                 return NetworkResult.Success(foodRecipes)
             }
             else -> {
+                Log.d("VVV Repo", response?.message())
                 return NetworkResult.Error(response?.message())
+
             }
         }
     }
