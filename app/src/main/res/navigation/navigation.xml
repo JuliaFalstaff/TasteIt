@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/recipesFragment">
+    <fragment
+        android:id="@+id/recipesFragment"
+        android:name="com.jfalstaff.tasteit.presentation.fragments.RecipesFragment"
+        android:label="Recipes" >
+        <action
+            android:id="@+id/action_recipesFragment_to_recipesBottomSheet"
+            app:destination="@id/recipesBottomSheet" />
+        <argument
+            android:name="backFromBottomFragment"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/favouriteFragment"
+        android:name="com.jfalstaff.tasteit.presentation.fragments.FavouriteFragment"
+        android:label="Favourite" />
+    <fragment
+        android:id="@+id/foodJokeFragment"
+        android:name="com.jfalstaff.tasteit.presentation.fragments.FoodJokeFragment"
+        android:label="Food Joke" />
+    <dialog
+        android:id="@+id/recipesBottomSheet"
+        android:name="com.jfalstaff.tasteit.presentation.fragments.RecipesBottomSheet"
+        android:label="RecipesBottomSheet" >
+        <action
+            android:id="@+id/action_recipesBottomSheet_to_recipesFragment"
+            app:destination="@id/recipesFragment" />
+    </dialog>
+</navigation>
