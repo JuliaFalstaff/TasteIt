@@ -8,17 +8,19 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavArgs
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.jfalstaff.tasteit.R
 import com.jfalstaff.tasteit.databinding.FragmentRecipesBinding
 import com.jfalstaff.tasteit.domain.NetworkResult
 import com.jfalstaff.tasteit.presentation.adapters.RecipesAdapter
+import com.jfalstaff.tasteit.presentation.util.NetworkListener
 import com.jfalstaff.tasteit.presentation.util.hasInternetConnection
 import com.jfalstaff.tasteit.presentation.util.observeOnce
 import com.jfalstaff.tasteit.presentation.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RecipesFragment : Fragment() {
@@ -28,6 +30,7 @@ class RecipesFragment : Fragment() {
     private val adapter: RecipesAdapter by lazy { RecipesAdapter() }
     private val viewModel by lazy { ViewModelProvider(this)[MainViewModel::class.java] }
     val args by navArgs<RecipesFragmentArgs>()
+    private lateinit var networkListener: NetworkListener
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,11 +46,35 @@ class RecipesFragment : Fragment() {
         setUpRV()
         readDataBase()
         setFabClickListener()
+        observeNetworkState()
+
+    }
+
+    private fun observeNetworkState() {
+        networkListener = NetworkListener()
+        lifecycleScope.launch {
+            networkListener.checkNetworkAvailability(requireContext())
+                .collect {
+                    Log.d("Network VVV", it.toString())
+                    viewModel.setNetworkStatus(it)
+                    showNetworkStatus(it)
+                }
+        }
+    }
+
+    private fun showNetworkStatus(isOnline: Boolean) {
+        if (!isOnline) {
+            Toast.makeText(requireContext(), "No Internet connection", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setFabClickListener() {
         binding.recipesFab.setOnClickListener {
-            findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
+                if(viewModel.networkStatus.value == true) {
+                    findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
+                } else {
+                    showNetworkStatus(false)
+                }
         }
     }
 
@@ -103,12 +130,12 @@ class RecipesFragment : Fragment() {
                 }
                 is NetworkResult.Error -> {
                     stopShimmerEffect()
-                    loadCacheData()
                     Toast.makeText(
                         requireContext(),
                         response.message.toString(),
                         Toast.LENGTH_SHORT
                     ).show()
+                    loadCacheData()
                     binding.errorImageView.visibility = View.VISIBLE
                     binding.errorTextView.visibility = View.VISIBLE
                     binding.errorTextView.text = response.message.toString()

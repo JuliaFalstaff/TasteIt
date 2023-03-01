@@ -24,10 +24,11 @@ class MainViewModel @Inject constructor(
     private var _recipes: MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
     val recipes: LiveData<NetworkResult<FoodRecipe>> = _recipes
     val readRecipesFromDB: LiveData<List<FoodRecipe>> = localUseCase().asLiveData()
-
     val readDataStore = dataStoreUseCase()
     private var mealType = DEFAULT_MEAL_TYPE
     private var dietType = DEFAULT_DIET_TYPE
+    private val _networkStatus: MutableLiveData<Boolean> = MutableLiveData(true)
+    val networkStatus: LiveData<Boolean> = _networkStatus
 
     fun saveDietAndMealType(
         mealType: String,
@@ -78,4 +79,7 @@ class MainViewModel @Inject constructor(
         applyQueries(queries)
     }
 
+    fun setNetworkStatus(isOnline: Boolean) {
+        _networkStatus.value = isOnline
+    }
 }
